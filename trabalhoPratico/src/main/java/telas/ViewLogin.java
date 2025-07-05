@@ -143,39 +143,34 @@ public class ViewLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
     
         btnEntrar.addActionListener(e -> {
-    String email = txtEmail.getText();
-    int senha;
-    try {
-        senha = Integer.parseInt(new String(txtSenha.getPassword()));
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Senha inválida.");
-        return;
-    }
-
-    boolean loginBemSucedido = false;
-    for (Usuario u : BancoUsuarios.getUsuarios()) {
-        if (u.getEmail().equals(email) && u.getSenha() == senha) {
-            loginBemSucedido = true;
-            JOptionPane.showMessageDialog(this, "Bem-vindo, " + u.getNome());
-
-            if (u instanceof Aluno) {
-                // abrir tela do aluno
-            } else if (u instanceof Professor) {
-                // abrir tela do professor
-            } else if (u instanceof Administrativo) {
-                // abrir tela do administrativo
-            } else if (u instanceof Servidor) {
-                // abrir tela do servidor
+            String email = txtEmail.getText();
+            int senha;
+            try {
+                senha = Integer.parseInt(new String(txtSenha.getPassword()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Senha inválida.");
+                return;
             }
 
-            break;
-        }
-    }
+        boolean loginBemSucedido = false;
+        for (Usuario u : BancoUsuarios.getUsuarios()) {
+            if (u.getEmail().equals(email) && u.getSenha() == senha) {
+                loginBemSucedido = true;
+                JOptionPane.showMessageDialog(this, "Bem-vindo, " + u.getNome());
 
-    if (!loginBemSucedido) {
-        JOptionPane.showMessageDialog(this, "Email ou senha incorretos.");
-    }
-});
+                if (u instanceof Usuario) {
+                    new telas.ViewPrincipal().setVisible(true);
+                    this.dispose();
+                }
+
+            break;
+            }
+        }
+
+        if (!loginBemSucedido) {
+            JOptionPane.showMessageDialog(this, "Email ou senha incorretos.");
+        }
+    });
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
