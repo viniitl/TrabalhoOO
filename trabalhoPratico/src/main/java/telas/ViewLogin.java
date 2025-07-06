@@ -159,7 +159,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Bem-vindo, " + u.getNome());
 
                 if (u instanceof Usuario) {
-                    new telas.ViewPrincipal().setVisible(true);
+                    new telas.viewPrincipal().setVisible(true);
                     this.dispose();
                 }
 

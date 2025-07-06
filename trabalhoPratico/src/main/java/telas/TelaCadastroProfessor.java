@@ -201,7 +201,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, mensagem);
 
     this.dispose();
-    new telas.ViewPrincipal().setVisible(true);
+    new telas.viewPrincipal().setVisible(true);
     }//GEN-LAST:event_btnMatricularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

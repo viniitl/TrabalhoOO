@@ -6,7 +6,7 @@ package telas;
 
 /**
  *
- * @author Lucas
+ * @author Lucas, Luis
  */
 public class viewPrincipal extends javax.swing.JFrame {
     
@@ -35,6 +35,9 @@ public class viewPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         boxUsuario = new javax.swing.JComboBox<>();
+        boxEspaco = new javax.swing.JComboBox<>();
+
+
 
         jMenu5.setText("File");
         jMenuBar3.add(jMenu5);
@@ -42,11 +45,19 @@ public class viewPrincipal extends javax.swing.JFrame {
         jMenu6.setText("Edit");
         jMenuBar3.add(jMenu6);
 
+
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Olá, ");
+
+        jMenu5.setText("Conta");
+
+        setJMenuBar(jMenuBar3);
+
+        jMenuConta = new javax.swing.JMenu("Conta");
+        menuLogin = new javax.swing.JMenuItem("Login");
 
         boxUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cadastrar:", "Aluno", "Professor", "Administrativo" }));
         boxUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +65,24 @@ public class viewPrincipal extends javax.swing.JFrame {
                 boxUsuarioActionPerformed(evt);
             }
         });
+
+        boxEspaco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cadastrar:", "Aluno", "Professor", "Administrativo" }));
+        boxEspaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxEspacoActionPerformed(evt);
+            }
+        });
+
+        
+
+        menuLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoginActionPerformed(evt);
+            }
+        });
+
+        jMenuConta.add(menuLogin);
+        jMenuBar3.add(jMenuConta);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,9 +116,15 @@ public class viewPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {
+    new ViewLogin().setVisible(true); 
+    this.dispose(); 
+    }
 
     private void boxUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxUsuarioActionPerformed
             String tipo = (String) boxUsuario.getSelectedItem();
@@ -105,6 +140,24 @@ public class viewPrincipal extends javax.swing.JFrame {
         telaAdm.setVisible(true);
     }
     }//GEN-LAST:event_boxUsuarioActionPerformed
+
+
+    private void boxEspacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxEspacoActionPerformed
+            String tipo = (String) boxEspaco.getSelectedItem();
+
+    if (tipo.equals("Criar espaco")) {
+        TelaCriarEspaco tela = new TelaCriarEspaco();
+        tela.setVisible(true);
+    } else if (tipo.equals("Editar Espaco")) {
+        TelaEditarEspaco tela = new TelaEditarEspaco();
+        tela.setVisible(true);
+    } else if (tipo.equals("Agendar Horario")) {
+        TelaAgendamento tela = new TelaAgendamento();
+        tela.setVisible(true);
+    }
+    }
+
+
 
     /**
      * @param args the command line arguments
@@ -133,11 +186,14 @@ public class viewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxUsuario;
+    private javax.swing.JComboBox<String> boxEspaco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JMenu jMenuConta;
+    private javax.swing.JMenuItem menuLogin;
     // End of variables declaration//GEN-END:variables
 }

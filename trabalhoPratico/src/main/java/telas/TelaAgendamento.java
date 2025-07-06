@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Eduardo
+ * @author Luis
  */
-public class TelaCadastroAluno extends javax.swing.JFrame {
+public class TelaAgendamento extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastroAluno.class.getName());
 
     /**
      * Creates new form TelaCadastro
      */
-    public TelaCadastroAluno() {
+    public TelaAgendamento() {
         initComponents();
     }
 
@@ -194,7 +194,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, mensagem);
 
     this.dispose();
-    new telas.viewPrincipal().setVisible(true);
+    new viewPrincipal().setVisible(true);
     }//GEN-LAST:event_btnMatricularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
