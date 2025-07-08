@@ -1,50 +1,48 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package entidades;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
- * @author Luis
+ * @author Eduardo
  */
+public class EspacoFisico {
+    
+    private String data;
+    private String espaco;
+    private String horario;
 
-public abstract class EspacoFisico {
-    private String nome,localizacao, sala;
-    private int capacidade;
-
-    public EspacoFisico(String nome, String localizacao, String sala, int capacidade){
-        this.nome = nome;
-        this.localizacao = localizacao;
-        this.sala = sala;
-        this.capacidade = capacidade;
+    public EspacoFisico(String data, String espaco, String horario) {
+        this.data = data;
+        this.espaco = espaco;
+        this.horario = horario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getData() {
+        return data;
     }
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-    public void setSala(String sala) {
-        this.sala = sala;
-    }
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getNome() {
-        return nome;
+        return espaco;
     }
 
-    public int getCapacidade() {
-        return capacidade;
+    public void setNome(String nome) {
+        this.espaco = nome;
     }
 
-    public String getNumero() {
-        return localizacao;
+    public String getHorario() {
+        return horario;
     }
 
-    public String getSala() {
-        return sala;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
+    
+    
 }

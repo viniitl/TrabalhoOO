@@ -46,6 +46,9 @@ public class Usuario {
 
     public int getSenha() {
         return senha;
-    }  
-            
+    }
+    
+    public boolean podeCadastrar() {
+        return false;
+    }
 }

@@ -30,4 +30,9 @@ public class Administrativo extends Servidor {
         this.departamento = departamento;
     }
     
+    @Override
+    public boolean podeCadastrar() {
+        return true;
+    }
+    
 }

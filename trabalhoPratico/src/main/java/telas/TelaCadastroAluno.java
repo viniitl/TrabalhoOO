@@ -5,7 +5,7 @@
 package telas;
 
 import entidades.Aluno;
-import entidades.BancoUsuarios;
+import servicos.BancoUsuarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -61,6 +61,11 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         jLabel5.setText("Nome Completo:");
 
         comboCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curso:", "Eng. Software", "Eng. Automotiva", "Eng. Eletrônica", "Eng. Energia" }));
+        comboCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCursoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Senha:");
 
@@ -171,35 +176,39 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         String curso = comboCurso.getSelectedItem().toString();
         int senha;
         
-    try {
-        senha = Integer.parseInt(txtSenha.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
-        return;
-    }
+        try {
+            senha = Integer.parseInt(txtSenha.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
+            return;
+        }
 
-    String matricula = gerarMatricula();
-    System.out.println("Matrícula gerada: " + matricula); // apenas para debug
+        String matricula = gerarMatricula();
+        System.out.println("Matrícula gerada: " + matricula);
 
-    Aluno novoAluno = new Aluno(nome, email, telefone, senha, curso);
-    BancoUsuarios.getUsuarios().add(novoAluno);
+        Aluno novoAluno = new Aluno(nome, email, telefone, senha, curso);
+        BancoUsuarios.getUsuarios().add(novoAluno);
 
-    String mensagem = "Aluno cadastrado com sucesso!\n"
-                + "Nome: " + nome + "\n"
-                + "Email: " + email + "\n"
-                + "Telefone: " + telefone + "\n"
-                + "Curso: " + curso + "\n"
-                + "Matrícula: " + matricula; // supondo que você tenha esse campo
+        String mensagem = "Aluno cadastrado com sucesso!\n"
+                    + "Nome: " + nome + "\n"
+                    + "Email: " + email + "\n"
+                    + "Telefone: " + telefone + "\n"
+                    + "Curso: " + curso + "\n"
+                    + "Matrícula: " + matricula; // supondo que você tenha esse campo
 
-    JOptionPane.showMessageDialog(this, mensagem);
+        JOptionPane.showMessageDialog(this, mensagem);
 
-    this.dispose();
-    new telas.viewPrincipal().setVisible(true);
+        this.dispose();
+        new telas.viewPrincipal().setVisible(true);
     }//GEN-LAST:event_btnMatricularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void comboCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCursoActionPerformed
 
     /**
      * @param args the command line arguments

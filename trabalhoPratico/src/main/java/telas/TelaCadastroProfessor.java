@@ -5,7 +5,7 @@
 package telas;
 
 import entidades.Professor;
-import entidades.BancoUsuarios;
+import servicos.BancoUsuarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -141,7 +141,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
                     .addComponent(btnMatricular))
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -177,31 +177,31 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
         String cargoAcademico = comboAcademico.getSelectedItem().toString();
         int senha;
         
-    try {
-        senha = Integer.parseInt(txtSenha.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
-        return;
-    }
+        try {
+            senha = Integer.parseInt(txtSenha.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
+            return;
+        }
 
-    String matriculaInst = gerarMatriculaInst();
-    System.out.println("Matrícula gerada: " + matriculaInst); // apenas para debug
+        String matriculaInst = gerarMatriculaInst();
+        System.out.println("Matrícula gerada: " + matriculaInst); 
 
-    Professor novoProfessor = new Professor(nome, email, telefone, senha, cursoMinistrado, cargoAcademico, matriculaInst);
-    BancoUsuarios.getUsuarios().add(novoProfessor);
+        Professor novoProfessor = new Professor(nome, email, telefone, senha, cursoMinistrado, cargoAcademico, matriculaInst);
+        BancoUsuarios.getUsuarios().add(novoProfessor);
 
-    String mensagem = "Professor cadastrado com sucesso!\n"
-                + "Nome: " + nome + "\n"
-                + "Email: " + email + "\n"
-                + "Telefone: " + telefone + "\n"
-                + "Curso Ministrado: " + cursoMinistrado + "\n"
-                + "Cargo Acadêmico: " + cargoAcademico + "\n"
-                + "Matrícula: " + matriculaInst;
+        String mensagem = "Professor cadastrado com sucesso!\n"
+                    + "Nome: " + nome + "\n"
+                    + "Email: " + email + "\n"
+                    + "Telefone: " + telefone + "\n"
+                    + "Curso Ministrado: " + cursoMinistrado + "\n"
+                    + "Cargo Acadêmico: " + cargoAcademico + "\n"
+                    + "Matrícula: " + matriculaInst;
 
-    JOptionPane.showMessageDialog(this, mensagem);
+        JOptionPane.showMessageDialog(this, mensagem);
 
-    this.dispose();
-    new telas.viewPrincipal().setVisible(true);
+        this.dispose();
+        new telas.viewPrincipal().setVisible(true);
     }//GEN-LAST:event_btnMatricularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

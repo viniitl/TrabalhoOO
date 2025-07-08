@@ -5,7 +5,7 @@
 package telas;
 
 import entidades.Administrativo;
-import entidades.BancoUsuarios;
+import servicos.BancoUsuarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -177,31 +177,31 @@ public class TelaCadastroAdministrativo extends javax.swing.JFrame {
         String departamento = comboDepartamento.getSelectedItem().toString();
         int senha;
         
-    try {
-        senha = Integer.parseInt(txtSenha.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
-        return;
-    }
+        try {
+            senha = Integer.parseInt(txtSenha.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Senha deve ser um número.");
+            return;
+        }
 
-    String matriculaInst = gerarMatriculaInst();
-    System.out.println("Matrícula gerada: " + matriculaInst);
+        String matriculaInst = gerarMatriculaInst();
+        System.out.println("Matrícula gerada: " + matriculaInst);
 
-    Administrativo novoAdministrativo = new Administrativo(nome, email, telefone, senha, cargo, departamento, matriculaInst);
-    BancoUsuarios.getUsuarios().add(novoAdministrativo);
+        Administrativo novoAdministrativo = new Administrativo(nome, email, telefone, senha, cargo, departamento, matriculaInst);
+        BancoUsuarios.getUsuarios().add(novoAdministrativo);
 
-    String mensagem = "ADM cadastrado com sucesso!\n"
-                + "Nome: " + nome + "\n"
-                + "Email: " + email + "\n"
-                + "Telefone: " + telefone + "\n"
-                + "Curso Ministrado: " + cargo + "\n"
-                + "Cargo Acadêmico: " + departamento + "\n"
-                + "Matrícula: " + matriculaInst;
+        String mensagem = "ADM cadastrado com sucesso!\n"
+                    + "Nome: " + nome + "\n"
+                    + "Email: " + email + "\n"
+                    + "Telefone: " + telefone + "\n"
+                    + "Curso Ministrado: " + cargo + "\n"
+                    + "Cargo Acadêmico: " + departamento + "\n"
+                    + "Matrícula: " + matriculaInst;
 
-    JOptionPane.showMessageDialog(this, mensagem);
+        JOptionPane.showMessageDialog(this, mensagem);
 
-    this.dispose();
-    new telas.viewPrincipal().setVisible(true);
+        this.dispose();
+        new telas.viewPrincipal().setVisible(true);
     }//GEN-LAST:event_btnMatricularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

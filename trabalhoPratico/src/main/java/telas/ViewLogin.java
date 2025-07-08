@@ -3,9 +3,10 @@ package telas;
 
 import entidades.Administrativo;
 import entidades.Aluno;
-import entidades.BancoUsuarios;
+import servicos.BancoUsuarios;
 import entidades.Professor;
 import entidades.Servidor;
+import servicos.Sessao;
 import entidades.Usuario;
 import javax.swing.JOptionPane;
 
@@ -142,28 +143,29 @@ public class ViewLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
     
-        btnEntrar.addActionListener(e -> {
-            String email = txtEmail.getText();
-            int senha;
-            try {
-                senha = Integer.parseInt(new String(txtSenha.getPassword()));
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Senha inválida.");
-                return;
-            }
+    btnEntrar.addActionListener(e -> {
+        String email = txtEmail.getText();
+        int senha;
+        try {
+            senha = Integer.parseInt(new String(txtSenha.getPassword()));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Senha inválida.");
+            return;
+        }
 
         boolean loginBemSucedido = false;
         for (Usuario u : BancoUsuarios.getUsuarios()) {
             if (u.getEmail().equals(email) && u.getSenha() == senha) {
                 loginBemSucedido = true;
+
+                Sessao.setUsuarioLogado(u);
+
                 JOptionPane.showMessageDialog(this, "Bem-vindo, " + u.getNome());
 
-                if (u instanceof Usuario) {
-                    new telas.viewPrincipal().setVisible(true);
-                    this.dispose();
-                }
+                new telas.viewPrincipal().setVisible(true);
+                this.dispose();
 
-            break;
+                break;
             }
         }
 
