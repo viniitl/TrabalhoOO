@@ -181,7 +181,7 @@ public class TelaReservaAluno extends javax.swing.JFrame {
         try {
             BancoReservas.adicionarReserva(novoEspaco);
 
-            String mensagem = "Sala reservada com sucesso!\n"
+            String mensagem = "Sala reservada com sucesso! \n"
                     + "Data: " + data + "\n"
                     + "Espaço: " + espaco + "\n"
                     + "Hora: " + hora + "\n";
