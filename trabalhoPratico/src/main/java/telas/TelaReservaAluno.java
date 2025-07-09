@@ -36,11 +36,11 @@ public class TelaReservaAluno extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         boxEspaco = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txtData = new javax.swing.JTextField();
         boxHora = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnAgendar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        txtData = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,12 +57,6 @@ public class TelaReservaAluno extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Data desejada:");
-
-        txtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataActionPerformed(evt);
-            }
-        });
 
         boxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "10:00 às 12:00", "14:00 às 16:00" }));
 
@@ -82,6 +76,12 @@ public class TelaReservaAluno extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,22 +89,22 @@ public class TelaReservaAluno extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addComponent(btnFechar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgendar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
+                            .addComponent(boxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtData, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(boxEspaco, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel4)
-                            .addComponent(boxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 17, Short.MAX_VALUE)
-                        .addComponent(btnFechar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgendar)))
+                                .addComponent(boxEspaco, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,35 +146,15 @@ public class TelaReservaAluno extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-    String texto = txtData.getText().replaceAll("\\D", "");
-
-    if (texto.length() == 4) {
-        try {
-            String dia = texto.substring(0, 2);
-            String mes = texto.substring(2, 4);
-
-            int diaInt = Integer.parseInt(dia);
-            int mesInt = Integer.parseInt(mes);
-            if (diaInt < 1 || diaInt > 31 || mesInt < 1 || mesInt > 12) {
-                throw new IllegalArgumentException();
-            }
-
-            String anoAtual = String.valueOf(java.time.Year.now().getValue()).substring(2);
-            String dataFormatada = dia + "/" + mes + "/" + anoAtual;
-            txtData.setText(dataFormatada);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Data inválida. Use 4 números (ex: 0103).");
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Digite 4 números, EX: 0103.");
-    }
-    }//GEN-LAST:event_txtDataActionPerformed
-
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
         String data = txtData.getText();
         String espaco = boxEspaco.getSelectedItem().toString();
         String hora = boxHora.getSelectedItem().toString();
+        
+        if (espaco.equals("Selecione") || hora.equals("Selecione") || data.contains(" ")) {
+        JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        return; 
+        }
 
         EspacoFisico novoEspaco = new EspacoFisico(data, espaco, hora);
 
@@ -248,6 +228,6 @@ public class TelaReservaAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtData;
+    private javax.swing.JFormattedTextField txtData;
     // End of variables declaration//GEN-END:variables
 }
