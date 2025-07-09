@@ -147,18 +147,28 @@ public class TelaReservaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        String texto = txtData.getText().replaceAll("\\D", "");
+    String texto = txtData.getText().replaceAll("\\D", "");
 
-        if (texto.length() == 4) {
+    if (texto.length() == 4) {
+        try {
             String dia = texto.substring(0, 2);
             String mes = texto.substring(2, 4);
-            String anoAtual = String.valueOf(java.time.Year.now().getValue()).substring(2);
 
+            int diaInt = Integer.parseInt(dia);
+            int mesInt = Integer.parseInt(mes);
+            if (diaInt < 1 || diaInt > 31 || mesInt < 1 || mesInt > 12) {
+                throw new IllegalArgumentException();
+            }
+
+            String anoAtual = String.valueOf(java.time.Year.now().getValue()).substring(2);
             String dataFormatada = dia + "/" + mes + "/" + anoAtual;
             txtData.setText(dataFormatada);
-        } else {
-            JOptionPane.showMessageDialog(this, "Digite 4 números, EX: 0103.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Data inválida. Use 4 números (ex: 0103).");
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Digite 4 números, EX: 0103.");
+    }
     }//GEN-LAST:event_txtDataActionPerformed
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed

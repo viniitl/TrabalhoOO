@@ -17,7 +17,7 @@ public class BancoUsuarios {
 
     static {
         usuarios.add(new Aluno("Ana", "ana@gmail.com", "11111111", 1234, "Engenharia"));
-        usuarios.add(new Professor("Carlos", "carlos@gmail.com", "22222222", 5678, "Cálculo", "Ciências Exatas", "12322"));
+        usuarios.add(new Professor("André", "andre@gmail.com", "22222222", 5678, "Orientaçao a Objetos", "Tecnologia", "12322"));
         usuarios.add(new Administrativo("Joana", "joana@gmail.com", "33333333", 9876, "RH", "Pessoal", "123412321"));
     }
 

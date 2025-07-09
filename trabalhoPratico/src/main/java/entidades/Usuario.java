@@ -4,7 +4,7 @@ package entidades;
  *
  * @author Eduardo
  */
-public class Usuario {
+public abstract class Usuario {
     
     private String nome, email, telefone;
     private int senha;

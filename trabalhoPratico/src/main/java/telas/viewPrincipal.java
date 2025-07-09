@@ -10,6 +10,7 @@ import servicos.BancoReservas;
 import entidades.Professor;
 import servicos.Sessao;
 import entidades.Usuario;
+import excecoes.SemAutorizacaoException;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,7 +44,7 @@ public class viewPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         boxUsuario = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        bntAgendar = new javax.swing.JButton();
         btnHistorico = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -67,10 +68,10 @@ public class viewPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("AGENDAR ESPAÇO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bntAgendar.setText("AGENDAR ESPAÇO");
+        bntAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntAgendarActionPerformed(evt);
             }
         });
 
@@ -95,7 +96,7 @@ public class viewPrincipal extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -109,7 +110,7 @@ public class viewPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(142, Short.MAX_VALUE))
@@ -137,8 +138,10 @@ public class viewPrincipal extends javax.swing.JFrame {
 
     private void boxUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxUsuarioActionPerformed
         String tipo = (String) boxUsuario.getSelectedItem();
-        
-        if (Sessao.getUsuarioLogado().podeCadastrar()) {
+
+        try {
+            SemAutorizacaoException.verificarAutorizacaoParaCadastro();
+            
             if (tipo.equals("Aluno")) {
                 TelaCadastroAluno telaAluno = new TelaCadastroAluno();
                 telaAluno.setVisible(true);
@@ -149,13 +152,12 @@ public class viewPrincipal extends javax.swing.JFrame {
                 TelaCadastroAdministrativo telaAdm = new TelaCadastroAdministrativo();
                 telaAdm.setVisible(true);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Você não tem autorização."); //EX
-        }
-       
+        } catch (SemAutorizacaoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }                                        
     }//GEN-LAST:event_boxUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bntAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgendarActionPerformed
         Usuario usuarioLogado = Sessao.usuarioLogado;
 
         if (usuarioLogado instanceof Aluno) {
@@ -167,7 +169,7 @@ public class viewPrincipal extends javax.swing.JFrame {
             return;
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bntAgendarActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         String caminho = "reservas.txt";
@@ -203,9 +205,9 @@ public class viewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAgendar;
     private javax.swing.JComboBox<String> boxUsuario;
     private javax.swing.JButton btnHistorico;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu5;
