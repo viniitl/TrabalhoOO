@@ -1,0 +1,17 @@
+telas\TelaCadastroAluno$4.class
+excecoes\SemAutorizacaoException.class
+servicos\BancoReservas.class
+telas\TelaReservaAluno$1.class
+telas\TelaReservaAluno.class
+telas\TelaReservaServidor.class
+telas\TelaReservaAluno$2.class
+telas\TelaReservaServidor$1.class
+telas\TelaReservaServidor$4.class
+excecoes\HorarioIndisponivelException.class
+telas\TelaReservaAluno$4.class
+servicos\Sessao.class
+servicos\BancoUsuarios.class
+telas\TelaReservaServidor$2.class
+telas\TelaReservaServidor$3.class
+telas\TelaReservaAluno$3.class
+telas\TelaReservaServidor$5.class
